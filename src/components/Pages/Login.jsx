@@ -1,13 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/Icons/Google.png";
+import { UserOther } from "../authContextApi/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const [error, setError] = useState("");
+  const { signIn } = useContext(UserOther);
+  const navigate=useNavigate();
+  const location=useLocation();
+  const from=location.state?.from?.pathname || '/'
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        setError("");
+        toast.success('Successfully logged!')
+        navigate(from)
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
   return (
     <div className="min-h-[calc(100vh-146px)] flex items-center justify-center">
       <div className="bg-gray-100 border-2 border-gray-300 w-2/5 p-8 rounded-xl shadow-xl">
         <h1 className="text-center font-bold text-xl mb-5">Login Please</h1>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="w-full">
             <label htmlFor="email">
               <span className="text-gray-600 ml-2">Email</span>
@@ -51,10 +77,9 @@ const Login = () => {
         </form>
         <div className="flex hover:bg-gray-200 items-center justify-center bg-gray-100 border-2 border-gray-400 rounded-full mt-7 cursor-pointer py-3 px-4">
           <img className="w-6" src={googleIcon} alt="" />
-          <span className="ml-2 text-black font-bold">
-            Login In With Google
-          </span>
+          <span className="ml-2 text-black font-bold">Login With Google</span>
         </div>
+        <p className="text-red-500 mt-3 text-center">{error}</p>
       </div>
     </div>
   );

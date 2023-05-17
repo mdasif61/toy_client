@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import navLogo from "../../assets/Images/navLogo.png";
 import { NavLink } from "react-router-dom";
+import { UserOther } from "../authContextApi/AuthProvider";
 
 const Navbar = () => {
+  const { logOut,user } = useContext(UserOther);
+
+  const handleLogOut = () => {
+    logOut()
+      .then((result) => {})
+      .catch((error) => {});
+  };
+
   return (
     <div className="navbar flex items-center justify-between bg-gray-800 rounded-full px-6">
       <div className="flex-1">
@@ -68,15 +77,17 @@ const Navbar = () => {
           Blog
         </NavLink>
 
-        <NavLink className='mx-4' to="/login">
-          <button className="btn btn-info">Login</button>
-        </NavLink>
+        {
+            !user && <NavLink className="mx-4" to="/login">
+            <button className="btn btn-info">Login</button>
+          </NavLink>
+        }
       </div>
       <div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            <div title={user?.displayName} className="w-10 rounded-full">
+              <img src={user?.photoURL} />
             </div>
           </label>
           <div
@@ -90,7 +101,23 @@ const Navbar = () => {
               <a>Settings</a>
             </div>
             <div>
-              <button className="btn btn-block btn-warning">Logout</button>
+              {
+                user?<>
+                <button
+                onClick={handleLogOut}
+                className="btn btn-block btn-warning"
+              >
+                Logout
+              </button>
+                </>:<>
+                <button
+                onClick={handleLogOut}
+                className="btn btn-block btn-warning"
+              >
+                Login
+              </button>
+                </>
+              }
             </div>
           </div>
         </div>
