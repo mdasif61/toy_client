@@ -1,0 +1,7 @@
+.kids{
+    background: url('../../assets//Images/kidsToys.jpg'), linear-gradient(to bottom, rgb(143, 93, 0),black);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+}
