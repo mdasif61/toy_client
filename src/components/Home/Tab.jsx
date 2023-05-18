@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FaStar, FaStarHalf } from "react-icons/fa";
+import Rating from "react-rating";
+import Modal from "../Modals/Modal";
 
 const Tab = () => {
   const [tab, setTab] = useState("All");
@@ -58,7 +61,10 @@ const Tab = () => {
       <div className="my-20">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
           {tabToy.map((toy) => (
-            <div className="p-5 border rounded-lg" key={toy._id}>
+            <div
+              className="p-5 border rounded-xl flex flex-col justify-between"
+              key={toy._id}
+            >
               <div>
                 <img
                   className="rounded-xl border-8 border-white shadow-xl"
@@ -67,12 +73,34 @@ const Tab = () => {
                 />
               </div>
               <div>
-                <h1>{toy.name}</h1>
+                <h1 className="text-xl font-bold mt-7 mb-3">{toy.name}</h1>
+                <h1 className="text-lg font-semibold">Price : ${toy.price}</h1>
+                <h3 className="font-semibold mt-2 badge badge-primary">
+                  Reting: {toy.rating}
+                </h3>
+                <br />
+                <Rating
+                  placeholderRating={toy.rating}
+                  readonly
+                  emptySymbol={<FaStar className="text-gray-300" />}
+                  placeholderSymbol={<FaStar className="text-orange-500" />}
+                  fullSymbol={<FaStarHalf />}
+                />
+              </div>
+              <div>
+                <label
+                  //   onClick={() => handleModal(toy._id)}
+                  htmlFor="my-modal-3"
+                  className="btn bg-orange-600 text-white btn-block border-none mt-5 hover:bg-orange-500"
+                >
+                  View Details
+                </label>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <Modal modalData={tabToy}></Modal>
     </div>
   );
 };

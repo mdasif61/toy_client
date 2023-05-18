@@ -1,0 +1,12 @@
+.gallery {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+.gallery-con {
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: 0;
+}
+.gallery-con::-webkit-scrollbar {
+  display: none;
+}
