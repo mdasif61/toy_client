@@ -26,8 +26,8 @@ const AddaToy = () => {
       sellerName,
       sellerEmail,
     };
-
-    fetch("http://localhost:5000/addToy", {
+  
+    fetch("https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/addToy", {
       method: "POST",
       headers: {
         "content-type": "application/json",

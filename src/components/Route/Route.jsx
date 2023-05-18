@@ -36,7 +36,8 @@ const router=createBrowserRouter([
             },
             {
                 path:'/alltoys',
-                element:<AllToy></AllToy>
+                element:<AllToy></AllToy>,
+                loader:()=>fetch('https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/totalToy')
             }
         ]
     }
