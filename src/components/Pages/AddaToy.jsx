@@ -1,10 +1,7 @@
 import React from "react";
 
 const AddaToy = () => {
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d13b78c491518b3c0615a5f7c21a52abc9ff442
   const handleAddToy = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -30,11 +27,7 @@ const AddaToy = () => {
       sellerEmail,
     };
 
-<<<<<<< HEAD
     fetch("http://localhost:5000/addToy", {
-=======
-    fetch("https://sports-server-one.vercel.app/addToy", {
->>>>>>> 6d13b78c491518b3c0615a5f7c21a52abc9ff442
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,17 +37,11 @@ const AddaToy = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-<<<<<<< HEAD
         form.reset()
       });
   };
 
 
-=======
-      });
-  };
-
->>>>>>> 6d13b78c491518b3c0615a5f7c21a52abc9ff442
   const options = [
     "Ball Games",
     "Outdoor Adventures",
@@ -107,7 +94,7 @@ const AddaToy = () => {
                   className="w-full mt-2 h-12 border py-2 px-4 focus:outline-none"
                 >
                   {options.map((option) => (
-                    <option>{option}</option>
+                    <option key={option}>{option}</option>
                   ))}
                 </select>
               </div>
@@ -119,11 +106,7 @@ const AddaToy = () => {
                 <br />
                 <input
                   className="w-full mt-2 h-12 focus:outline-none focus:border-b-2 focus:border-orange-500 border focus:border-t-0 py-2 px-4"
-<<<<<<< HEAD
                   type="text"
-=======
-                  type="number"
->>>>>>> 6d13b78c491518b3c0615a5f7c21a52abc9ff442
                   placeholder="Enter Item Rating"
                   name="rating"
                   id=""

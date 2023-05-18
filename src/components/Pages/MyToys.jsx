@@ -8,10 +8,8 @@ const MyToys = () => {
     useEffect(()=>{
         fetch(`http://localhost:5000/mytoys?email=${user.email}`)
         .then(res=>res.json())
-        .then(data=>{
-            setMyToy(data)
-        })
-    },[user.email])
+        .then(data=>console.log(data))
+    },[user])
 
     return (
         <div>
