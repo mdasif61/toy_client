@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
 import { useLoaderData } from "react-router-dom";
+import Modal from "../Modals/Modal";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
+  const [modalData, setModalData] = useState({});
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(4);
@@ -16,23 +18,25 @@ const AllToy = () => {
       .then((data) => {
         setAllToys(data);
       });
-  }, [toyName === "",limit]);
+  }, [toyName === "", limit]);
 
   const handleSearch = () => {
-    fetch(`https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/searchName/${toyName}`)
+    fetch(
+      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/searchName/${toyName}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAllToys(data);
       });
   };
 
-  const handleShowAll = () => {
+  const handleModal = (id) => {
     fetch(
-      "https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/alltoys"
+      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/uniqueToy/${id}`
     )
       .then((res) => res.json())
       .then((data) => {
-        setAllToys(data);
+        setModalData(data);
       });
   };
 
@@ -75,28 +79,40 @@ const AllToy = () => {
               <td className="font-bold">${toy.price}</td>
               <td>{toy.quantity}</td>
               <td>
-                <button className="btn">View Details</button>
+                <label
+                  onClick={() => handleModal(toy._id)}
+                  htmlFor="my-modal-3"
+                  className="btn"
+                >
+                  View Details
+                </label>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <div className="text-center mt-7">
-        {
-            limit ==4?<><button
-            onClick={() => setLimit(totalToy)}
-            className="btn bg-red-500 border-none"
-          >
-            Show All
-          </button></>
-          :<><button
-          onClick={() => setLimit(4)}
-          className="btn bg-red-500 border-none"
-        >
-          Show Less
-        </button></>
-        }
+        {limit == 4 ? (
+          <>
+            <button
+              onClick={() => setLimit(totalToy)}
+              className="btn bg-red-500 border-none"
+            >
+              Show All
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => setLimit(4)}
+              className="btn bg-red-500 border-none"
+            >
+              Show Less
+            </button>
+          </>
+        )}
       </div>
+      <Modal modalData={modalData}></Modal>
     </div>
   );
 };
