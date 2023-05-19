@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Register = () => {
     const [error,setError]=useState("")
-    const {createUser,updateData, logOut}=useContext(UserOther);
+    const {createUser,updateData, googleLogin, logOut}=useContext(UserOther);
     const navigate=useNavigate()
 
     const handleRegister=event=>{
@@ -52,6 +52,10 @@ const Register = () => {
             console.log(error)
             setError(error.message)
         })
+
+    }
+
+    const handleGoogleRegister=()=>{
 
     }
 
@@ -129,7 +133,7 @@ const Register = () => {
             </Link>
           </p>
         </form>
-        <div className="flex hover:bg-gray-200 items-center justify-center bg-gray-100 border-2 border-gray-400 rounded-full mt-7 cursor-pointer py-3 px-4">
+        <div onClick={handleGoogleRegister} className="flex hover:bg-gray-200 items-center justify-center bg-gray-100 border-2 border-gray-400 rounded-full mt-7 cursor-pointer py-3 px-4">
           <img className="w-6" src={googleIcon} alt="" />
           <span className="ml-2 text-black font-bold">
             Register With Google

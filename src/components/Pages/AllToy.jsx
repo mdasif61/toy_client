@@ -12,7 +12,7 @@ const AllToy = () => {
 
   useEffect(() => {
     fetch(
-      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/alltoys?limit=${limit}`
+      `https://sports-special-server.onrender.com/alltoys?limit=${limit}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -22,7 +22,7 @@ const AllToy = () => {
 
   const handleSearch = () => {
     fetch(
-      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/searchName/${toyName}`
+      `https://sports-special-server.onrender.com/searchName/${toyName}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -32,7 +32,7 @@ const AllToy = () => {
 
   const handleModal = (id) => {
     fetch(
-      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/uniqueToy/${id}`
+      `https://sports-special-server.onrender.com/uniqueToy/${id}`
     )
       .then((res) => res.json())
       .then((data) => {

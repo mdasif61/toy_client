@@ -2,15 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserOther } from "../authContextApi/AuthProvider";
 import { FaPen, FaStar, FaStarHalf, FaTrash } from "react-icons/fa";
 import Rating from "react-rating";
+import UpdateModal from "../Modals/UpdateModal";
+import { Link } from "react-router-dom";
 
 const MyToys = () => {
   const [myToy, setMyToy] = useState([]);
+  const [updateModal, setUpdateModal] = useState({});
   const { user } = useContext(UserOther);
-  console.log(myToy);
 
   useEffect(() => {
     fetch(
-      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/mytoys?email=${user.email}`
+      `https://sports-special-server.onrender.com/mytoys?email=${user.email}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -20,7 +22,7 @@ const MyToys = () => {
 
   const handleDelete = (id) => {
     fetch(
-      `https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/mytoys/${id}`,
+      `https://sports-special-server.onrender.com/mytoys/${id}`,
       {
         method: "DELETE",
       }
@@ -31,6 +33,52 @@ const MyToys = () => {
           const remaining = myToy.filter((toy) => toy._id !== id);
           setMyToy(remaining);
         }
+      });
+  };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const price = form.price.value;
+    const category = form.category.value;
+    const rating = form.rating.value;
+    const quantity = form.quantity.value;
+    const desc = form.desc.value;
+    const picture = form.picture.value;
+
+    const toyInfo = {
+      name,
+      price,
+      category,
+      rating,
+      quantity,
+      desc,
+      picture,
+    };
+
+    fetch(`https://sports-special-server.onrender.com.app/toyUpdate/${updateModal._id}`,{
+      method:'PUT',
+      body:JSON.stringify(toyInfo)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          const remaining = myToy.filter((toy) => toy._id !== updateModal._id);
+          const updateToy = myToy.find((toy) => toy._id === updateModal._id);
+          const newToy = [updateToy, ...remaining];
+          setMyToy(newToy);
+        }
+      });
+  };
+
+  const handleUpdateModal = (id) => {
+    fetch(
+      `https://sports-special-server.onrender.com/uniqueToy/${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUpdateModal(data);
       });
   };
 
@@ -78,9 +126,15 @@ const MyToys = () => {
                     {toys.sellerEmail}
                   </td>
                   <td>
-                    <button className="text-orange-600 mx-2">
-                      <FaPen />
+                    <Link to={`/updateData/${toys._id}`}>
+                    <button
+                      title="Edit toy info"
+                      onClick={() => handleUpdateModal(toys._id)}
+                      className="text-orange-600 mx-2"
+                    >
+                     <FaPen />
                     </button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(toys._id)}
                       className="text-red-600 mx-2"
@@ -94,6 +148,10 @@ const MyToys = () => {
           </table>
         </div>
       </div>
+      {/* <UpdateModal
+        updateModal={updateModal}
+        handleUpdate={handleUpdate}
+      ></UpdateModal> */}
     </div>
   );
 };

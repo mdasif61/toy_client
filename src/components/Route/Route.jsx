@@ -10,6 +10,7 @@ import AllToy from "../Pages/AllToy";
 import Details from "../Pages/Details";
 import Modal from "../Modals/Modal";
 import Error from "../Pages/Error";
+import UpdateData from "../Pages/UpdateData";
 
 
 const router=createBrowserRouter([
@@ -41,12 +42,17 @@ const router=createBrowserRouter([
             {
                 path:'/alltoys',
                 element:<AllToy></AllToy>,
-                loader:()=>fetch('https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/totalToy')
+                loader:()=>fetch('https://sports-special-server.onrender.com/totalToy')
             },
             {
                 path:'/details/:id',
                 element:<PrivateRoute><Details></Details></PrivateRoute>,
-                loader:({params})=>fetch(`https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/uniqueToy/${params.id}`)
+                loader:({params})=>fetch(`https://sports-special-server.onrender.com/uniqueToy/${params.id}`)
+            },
+            {
+                path:'/updateData/:id',
+                element:<UpdateData></UpdateData>,
+                loader:({params})=>fetch(`https://sports-special-server.onrender.com/uniqueToy/${params.id}`)
             }
         ]
     }

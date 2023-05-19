@@ -1,55 +1,29 @@
-import React from "react";
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-const AddaToy = () => {
-  const handleAddToy = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const price = form.price.value;
-    const category = form.category.value;
-    const rating = form.rating.value;
-    const quantity = form.quantity.value;
-    const desc = form.desc.value;
-    const picture = form.picture.value;
-    const sellerName = form.sellerName.value;
-    const sellerEmail = form.sellerEmail.value;
+const UpdateData = () => {
+    const updateToy=useLoaderData();
 
-    const toyInfo = {
-      name,
-      price,
-      category,
-      rating,
-      quantity,
-      desc,
-      picture,
-      sellerName,
-      sellerEmail,
-    };
+    
+    const handleUpdateToy=(id)=>{
+        fetch(`https://sports-special-server.onrender.com/toyUpdate/${id}`,{
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(updateToy)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+        })
+    }
 
-    fetch(
-      "https://sports-special-server.onrender.com/addToy",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(toyInfo),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        form.reset();
-      });
-  };
+    const options = ["Ball Games", "Outdoor Adventures", "Team Sports"];
 
-  const options = ["Ball Games", "Outdoor Adventures", "Team Sports"];
-
-  return (
-    <div className="min-h-[calc(100vh-146px)] flex items-center justify-center">
-      <div className="w-full">
-        <h1 className="text-3xl font-bold text-center my-10">Add Toys</h1>
-        <form onSubmit={handleAddToy} className="w-full">
+    return (
+        <div className='my-20'>
+        <form className="w-full">
           <div className="w-full bg-orange-50 border-2 border-orange-600 p-10 rounded-xl">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
               <div className="w-full">
@@ -63,6 +37,7 @@ const AddaToy = () => {
                   name="name"
                   placeholder="Enter Item Name"
                   id=""
+                  defaultValue={updateToy.name}
                 />
               </div>
 
@@ -77,6 +52,7 @@ const AddaToy = () => {
                   name="price"
                   placeholder="Enter Item Price"
                   id=""
+                  defaultValue={updateToy.price}
                 />
               </div>
 
@@ -107,6 +83,7 @@ const AddaToy = () => {
                   placeholder="Enter Item Rating"
                   name="rating"
                   id=""
+                  defaultValue={updateToy.rating}
                 />
               </div>
 
@@ -121,6 +98,7 @@ const AddaToy = () => {
                   name="quantity"
                   placeholder="Enter Available Quantity"
                   id=""
+                  defaultValue={updateToy.quantity}
                 />
               </div>
 
@@ -137,6 +115,7 @@ const AddaToy = () => {
                   name="picture"
                   placeholder="Enter Picture URL"
                   id=""
+                  defaultValue={updateToy.picture}
                 />
               </div>
             </div>
@@ -150,51 +129,17 @@ const AddaToy = () => {
                 name="desc"
                 id=""
                 placeholder="write item description"
+                defaultValue={updateToy.desc}
               ></textarea>
             </div>
           </div>
 
-          <div className="bg-orange-100 border-2 border-orange-600 rounded-xl p-10 my-10">
-            <h1 className="text-center font-bold text-xl">
-              Seller Information
-            </h1>
-            <div className="grid grid-cols-1 mt-5 md:grid-cols-2 gap-5">
-              <div className="w-full">
-                <label htmlFor="sellerName">
-                  <span className="font-semibold">Name</span>
-                </label>
-                <br />
-                <input
-                  className="w-full h-12 py-2 px-4 border-orange-500 border focus:outline-none focus:border-2 mt-2"
-                  type="text"
-                  name="sellerName"
-                  id=""
-                  placeholder="Enter Your Name"
-                />
-              </div>
-
-              <div className="w-full">
-                <label htmlFor="sellerEmail">
-                  <span className="font-semibold">Email</span>
-                </label>
-                <br />
-                <input
-                  className="w-full h-12 py-2 px-4 border-orange-500 border focus:outline-none focus:border-2 mt-2"
-                  type="email"
-                  name="sellerEmail"
-                  id=""
-                  placeholder="Enter Your Email"
-                />
-              </div>
-            </div>
-          </div>
-          <button className="btn btn-block mb-10 bg-orange-500 border-none">
-            Add Toy
-          </button>
         </form>
-      </div>
-    </div>
-  );
+          <button onClick={()=>handleUpdateToy(updateToy._id)} className="btn btn-block my-10 bg-orange-500 border-none">
+            UPDATE TOY
+          </button>
+        </div>
+    );
 };
 
-export default AddaToy;
+export default UpdateData;
