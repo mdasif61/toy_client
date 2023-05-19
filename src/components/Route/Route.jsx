@@ -7,12 +7,16 @@ import MyToys from "../Pages/MyToys";
 import Home from "../Home/Home";
 import AddaToy from "../Pages/AddaToy";
 import AllToy from "../Pages/AllToy";
+import Details from "../Pages/Details";
+import Modal from "../Modals/Modal";
+import Error from "../Pages/Error";
 
 
 const router=createBrowserRouter([
     {
         path:'/',
         element:<Main></Main>,
+        errorElement:<Error></Error>,
         children:[
             {
                 path:'/',
@@ -38,6 +42,11 @@ const router=createBrowserRouter([
                 path:'/alltoys',
                 element:<AllToy></AllToy>,
                 loader:()=>fetch('https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/totalToy')
+            },
+            {
+                path:'/details/:id',
+                element:<PrivateRoute><Details></Details></PrivateRoute>,
+                loader:({params})=>fetch(`https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/uniqueToy/${params.id}`)
             }
         ]
     }

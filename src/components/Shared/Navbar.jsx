@@ -44,7 +44,8 @@ const Navbar = () => {
           All Toys
         </NavLink>
 
-        <NavLink
+        {user && <>
+          <NavLink
           className={({ isActive }) =>
             isActive
               ? "text-orange-500 mx-4 py-1 px-2 border-b border-orange-500"
@@ -65,6 +66,7 @@ const Navbar = () => {
         >
           Add A Toy
         </NavLink>
+        </>}
 
         <NavLink
           className={({ isActive }) =>
@@ -78,12 +80,13 @@ const Navbar = () => {
         </NavLink>
 
         {
-            !user && <NavLink className="mx-4" to="/login">
-            <button className="btn btn-info">Login</button>
+            !user && <NavLink className="ml-4" to="/login">
+            <button className="btn bg-orange-600 rounded-full hover:bg-orange-500 w-28">Login</button>
           </NavLink>
         }
       </div>
-      <div>
+      {
+        user && <div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div title={user?.displayName} className="w-10 rounded-full">
@@ -122,6 +125,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      }
     </div>
   );
 };

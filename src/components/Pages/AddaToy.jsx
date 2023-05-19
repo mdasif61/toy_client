@@ -1,7 +1,6 @@
 import React from "react";
 
 const AddaToy = () => {
-
   const handleAddToy = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -11,7 +10,7 @@ const AddaToy = () => {
     const rating = form.rating.value;
     const quantity = form.quantity.value;
     const desc = form.desc.value;
-    const picture=form.picture.value;
+    const picture = form.picture.value;
     const sellerName = form.sellerName.value;
     const sellerEmail = form.sellerEmail.value;
 
@@ -26,27 +25,26 @@ const AddaToy = () => {
       sellerName,
       sellerEmail,
     };
-  
-    fetch("https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/addToy", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(toyInfo),
-    })
+
+    fetch(
+      "https://b7a11-toy-marketplace-server-side-mdasif61.vercel.app/addToy",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "Access-Control-Allow-Methods": true,
+        },
+        body: JSON.stringify(toyInfo),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        form.reset()
+        form.reset();
       });
   };
 
-
-  const options = [
-    "Ball Games",
-    "Outdoor Adventures",
-    "Team Sports",
-  ];
+  const options = ["Ball Games", "Outdoor Adventures", "Team Sports"];
 
   return (
     <div className="min-h-[calc(100vh-146px)] flex items-center justify-center">
@@ -85,7 +83,7 @@ const AddaToy = () => {
 
               <div className="w-full">
                 <label htmlFor="category">
-                  <span className="font-semibold">Category</span>
+                  <span className="font-semibold">Sub-Category</span>
                 </label>
                 <br />
                 <select
@@ -129,7 +127,9 @@ const AddaToy = () => {
 
               <div className="w-full">
                 <label htmlFor="quantity">
-                  <span className="font-semibold">Picture <small>url</small></span>
+                  <span className="font-semibold">
+                    Picture <small>url</small>
+                  </span>
                 </label>
                 <br />
                 <input

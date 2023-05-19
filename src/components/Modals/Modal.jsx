@@ -1,5 +1,5 @@
 import React from "react";
-import { FaRegStar, FaStar, FaStarHalf } from "react-icons/fa";
+import { FaStar, FaStarHalf } from "react-icons/fa";
 import Rating from "react-rating";
 
 const Modal = ({ modalData }) => {

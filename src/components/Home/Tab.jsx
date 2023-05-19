@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import Rating from "react-rating";
 import Modal from "../Modals/Modal";
+import { Link } from "react-router-dom";
 
 const Tab = () => {
   const [tab, setTab] = useState("All");
@@ -88,19 +89,16 @@ const Tab = () => {
                 />
               </div>
               <div>
-                <label
-                  //   onClick={() => handleModal(toy._id)}
-                  htmlFor="my-modal-3"
-                  className="btn bg-orange-600 text-white btn-block border-none mt-5 hover:bg-orange-500"
-                >
-                  View Details
-                </label>
+                <Link to={`/details/${toy._id}`}>
+                  <button className="btn bg-orange-600 text-white btn-block border-none mt-5 hover:bg-orange-500">
+                    View Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <Modal modalData={tabToy}></Modal>
     </div>
   );
 };
