@@ -4,14 +4,25 @@ import { useLoaderData } from 'react-router-dom';
 const UpdateData = () => {
     const updateToy=useLoaderData();
 
-    
+    const {quantity,name,price,category,desc,rating,picture}=updateToy;
+
+    const toys={
+        quantity,
+        name,
+        price,
+        category,
+        desc,
+        rating,
+        picture
+    }
+
     const handleUpdateToy=(id)=>{
         fetch(`https://sports-special-server.onrender.com/toyUpdate/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify(updateToy)
+            body:JSON.stringify(toys)
         })
         .then(res=>res.json())
         .then(data=>{
