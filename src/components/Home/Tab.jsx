@@ -114,7 +114,7 @@ const Tab = () => {
           ))}
         </div>
       </div>
-      {!user && open && toast.success(message)}
+      {!user && open && toast(message)}
     </div>
   );
 };
