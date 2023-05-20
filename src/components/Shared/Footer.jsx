@@ -65,6 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            <p className='text-center text-gray-500 mt-5'>Copy Right 2023 || All Rights Reseverd</p>
         </div>
     );
 };

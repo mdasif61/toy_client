@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { signIn,googleLogin } = useContext(UserOther);
+  const { signIn,googleLogin,updateData } = useContext(UserOther);
   const navigate=useNavigate();
   const location=useLocation();
   const from=location.state?.from?.pathname || '/'

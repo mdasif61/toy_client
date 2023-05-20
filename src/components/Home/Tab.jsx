@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import Rating from "react-rating";
 import Modal from "../Modals/Modal";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { UserOther } from "../authContextApi/AuthProvider";
 
 const Tab = () => {
   const [tab, setTab] = useState("All");
   const [tabToy, setTabToy] = useState([]);
+  const { user } = useContext(UserOther);
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -74,8 +79,12 @@ const Tab = () => {
                 />
               </div>
               <div>
-                <h1 className="md:text-xl text-lg font-bold mt-7 mb-3">{toy.name}</h1>
-                <h1 className="md:text-lg text-base font-semibold">Price : ${toy.price}</h1>
+                <h1 className="md:text-xl text-lg font-bold mt-7 mb-3">
+                  {toy.name}
+                </h1>
+                <h1 className="md:text-lg text-base font-semibold">
+                  Price : ${toy.price}
+                </h1>
                 <h3 className="font-semibold mt-2 badge badge-primary">
                   Reting: {toy.rating}
                 </h3>
@@ -90,7 +99,13 @@ const Tab = () => {
               </div>
               <div>
                 <Link to={`/details/${toy._id}`}>
-                  <button className="btn bg-orange-600 text-white btn-block border-none mt-5 hover:bg-orange-500">
+                  <button
+                    onClick={() => {
+                      setMessage("You have to log in first to view details"),
+                        setOpen(!open);
+                    }}
+                    className="btn bg-orange-600 text-white btn-block border-none mt-5 hover:bg-orange-500"
+                  >
                     View Details
                   </button>
                 </Link>
@@ -99,6 +114,7 @@ const Tab = () => {
           ))}
         </div>
       </div>
+      {!user && open && toast.success(message)}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Details from "../Pages/Details";
 import Modal from "../Modals/Modal";
 import Error from "../Pages/Error";
 import UpdateData from "../Pages/UpdateData";
+import Blog from "../Pages/Blog";
 
 
 const router=createBrowserRouter([
@@ -53,6 +54,10 @@ const router=createBrowserRouter([
                 path:'/updateData/:id',
                 element:<UpdateData></UpdateData>,
                 loader:({params})=>fetch(`https://sports-special-server.onrender.com/uniqueToy/${params.id}`)
+            },
+            {
+                path:'/blog',
+                element:<Blog></Blog>
             }
         ]
     }
