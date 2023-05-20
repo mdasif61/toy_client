@@ -5,6 +5,7 @@ import Modal from "../Modals/Modal";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { UserOther } from "../authContextApi/AuthProvider";
+import AOS from 'aos';
 
 const Tab = () => {
   const [tab, setTab] = useState("All");
@@ -12,6 +13,10 @@ const Tab = () => {
   const { user } = useContext(UserOther);
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
+
+  useEffect(()=>{
+    AOS.init({duration:2000})
+  },[])
 
   useEffect(() => {
     fetch(
@@ -70,6 +75,7 @@ const Tab = () => {
             <div
               className="md:p-5 p-4 border rounded-xl flex flex-col justify-between"
               key={toy._id}
+              data-aos='fade-up'
             >
               <div>
                 <img

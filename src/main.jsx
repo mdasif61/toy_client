@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 import router from './components/Route/Route'
 import AuthProvider from './components/authContextApi/AuthProvider'
 import { Toaster } from 'react-hot-toast';
+import 'aos/dist/aos.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

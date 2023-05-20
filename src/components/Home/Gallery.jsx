@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../Css/Gallery.css";
+import AOS from 'aos';
 
 const Gallery = () => {
   const [gallery, setGallery] = useState([]);
+
+  useEffect(()=>{
+    AOS.init({duration:1000})
+  },[])
 
   useEffect(() => {
     fetch(
@@ -22,7 +27,7 @@ const Gallery = () => {
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gallery-con gap-5 my-12">
         {gallery.map((image, index) => (
-          <div className="gallery">
+          <div className="gallery" data-aos='fade-up'>
             <img
               className={`h-full scale-[3] duration-500 hover:scale-100`}
               src={image.picture}
