@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" bg-gray-800 relative md:h-[70px] h-[50px] flex items-center w-full rounded-full px-6">
+    <div className=" bg-gray-800 sticky top-0 z-50 md:h-[70px] h-[50px] flex items-center w-full rounded-full px-6">
       <div onClick={()=>setOpen(!open)} className="text-white flex justify-between items-center w-full md:hidden">
         <span>{!open?<><FaBars/></>:<span className="text-2xl"><FaAngleLeft/></span>}</span>
         {!open? <div className="md:hidden">

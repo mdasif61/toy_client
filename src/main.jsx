@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div className='max-w-7xl mx-auto p-10'>
+    <div className='max-w-7xl mx-auto p-5'>
     <AuthProvider>
     <RouterProvider router={router}></RouterProvider>
     <Toaster/>

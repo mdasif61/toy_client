@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserOther } from "../authContextApi/AuthProvider";
 
 const AddaToy = () => {
+
+  const {user}=useContext(UserOther)
+  const [error,setError]=useState("")
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   const handleAddToy = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -13,6 +22,35 @@ const AddaToy = () => {
     const picture = form.picture.value;
     const sellerName = form.sellerName.value;
     const sellerEmail = form.sellerEmail.value;
+
+    if(name==""){
+      setError("Toy Name Not Found")
+      return;
+    }
+    else if(price==""){
+      setError("Price Not Found")
+      return;
+    }
+    else if(category==""){
+      setError("Category Not Found")
+      return;
+    }
+    else if(rating==""){
+      setError("Rating Not Found")
+      return;
+    }
+    else if(quantity==""){
+      setError("Quantity Not Found");
+      return;
+    }
+    else if(desc==""){
+      setError("Description Not Found")
+      return;
+    }
+    else if(picture==""){
+      setError("Picture URL Not Found");
+      return;
+    }
 
     const toyInfo = {
       name,
@@ -170,6 +208,8 @@ const AddaToy = () => {
                   name="sellerName"
                   id=""
                   placeholder="Enter Your Name"
+                  defaultValue={user?.displayName}
+                  readOnly
                 />
               </div>
 
@@ -184,10 +224,13 @@ const AddaToy = () => {
                   name="sellerEmail"
                   id=""
                   placeholder="Enter Your Email"
+                  defaultValue={user?.email}
+                  readOnly
                 />
               </div>
             </div>
           </div>
+        <p className="text-red-600 text-center mb-2">{error && '*'+ error}</p>
           <button className="btn btn-block mb-10 bg-orange-500 border-none">
             Add Toy
           </button>

@@ -60,7 +60,7 @@ const Register = () => {
     }
 
     return (
-        <div className="min-h-[calc(100vh-146px)] flex items-center justify-center">
+        <div className="min-h-[calc(100vh-146px)] my-20 flex items-center justify-center">
       <div className="bg-gray-100 border-2 border-gray-300 w-2/5 p-8 rounded-xl shadow-xl">
         <h1 className="text-center font-bold text-xl mb-5">Register Please</h1>
         <form onSubmit={handleRegister}>

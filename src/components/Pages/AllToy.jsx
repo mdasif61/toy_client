@@ -10,8 +10,10 @@ const AllToy = () => {
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(4);
-  const { user} = useContext(UserOther);
-  const [open,setOpen]=useState(false)
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   useEffect(() => {
     fetch(
@@ -83,11 +85,8 @@ const AllToy = () => {
               <td>{toy.quantity}</td>
               <td>
                 <label
-                  onClick={() =>{
-                    handleModal(toy._id),
-                    setOpen(!open)
-                  }}
-                  htmlFor={`${user && 'my-modal-3'}`}
+                  onClick={() => handleModal(toy._id)}
+                  htmlFor='my-modal-3'
                   className="btn"
                 >
                   View Details
@@ -118,7 +117,7 @@ const AllToy = () => {
           </>
         )}
       </div>
-      <Modal modalData={modalData}></Modal>:<Navigate to='/login'></Navigate>
+      <Modal modalData={modalData}></Modal>
     </div>
   );
 };

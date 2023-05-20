@@ -3,11 +3,15 @@ import { UserOther } from "../authContextApi/AuthProvider";
 import { FaPen, FaStar, FaStarHalf, FaTrash } from "react-icons/fa";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 const MyToys = () => {
   const [myToy, setMyToy] = useState([]);
-  const [updateModal, setUpdateModal] = useState({});
   const { user } = useContext(UserOther);
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   useEffect(() => {
     fetch(
@@ -20,70 +24,42 @@ const MyToys = () => {
   }, [user.email]);
 
   const handleDelete = (id) => {
-    fetch(
-      `https://sports-special-server.onrender.com/mytoys/${id}`,
-      {
-        method: "DELETE",
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'DELETE'
+    }).then((result) => {
+      console.log(result)
+      if (result.isConfirmed) {
+        fetch(
+          `https://sports-special-server.onrender.com/mytoys/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              const remaining = myToy.filter((toy) => toy._id !== id);
+              setMyToy(remaining);
+            }
+          });
+        Swal.fire(
+          'Deleted!',
+          'Your toy has been deleted.',
+          'success'
+        )
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          const remaining = myToy.filter((toy) => toy._id !== id);
-          setMyToy(remaining);
-        }
-      });
-  };
-
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const price = form.price.value;
-    const category = form.category.value;
-    const rating = form.rating.value;
-    const quantity = form.quantity.value;
-    const desc = form.desc.value;
-    const picture = form.picture.value;
-
-    const toyInfo = {
-      name,
-      price,
-      category,
-      rating,
-      quantity,
-      desc,
-      picture,
-    };
-
-    fetch(`https://sports-special-server.onrender.com.app/toyUpdate/${updateModal._id}`,{
-      method:'PUT',
-      body:JSON.stringify(toyInfo)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          const remaining = myToy.filter((toy) => toy._id !== updateModal._id);
-          const updateToy = myToy.find((toy) => toy._id === updateModal._id);
-          const newToy = [updateToy, ...remaining];
-          setMyToy(newToy);
-        }
-      });
-  };
 
-  const handleUpdateModal = (id) => {
-    fetch(
-      `https://sports-special-server.onrender.com/uniqueToy/${id}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUpdateModal(data);
-      });
   };
 
   return (
     <div className="min-h-[calc(100vh-146px)]">
-      <div className="mt-20">
+      <div className="my-20">
         <div>
           <table className="w-full table text-center">
             <thead>
@@ -128,7 +104,6 @@ const MyToys = () => {
                     <Link to={`/updateData/${toys._id}`}>
                     <button
                       title="Edit toy info"
-                      onClick={() => handleUpdateModal(toys._id)}
                       className="text-orange-600 mx-2"
                     >
                      <FaPen />
@@ -147,10 +122,6 @@ const MyToys = () => {
           </table>
         </div>
       </div>
-      {/* <UpdateModal
-        updateModal={updateModal}
-        handleUpdate={handleUpdate}
-      ></UpdateModal> */}
     </div>
   );
 };

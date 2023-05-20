@@ -1,8 +1,10 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const UpdateData = () => {
     const updateToy=useLoaderData();
+    const navigate=useNavigate()
 
     const handleUpdateToy=(event)=>{
         event.preventDefault();
@@ -37,7 +39,10 @@ const UpdateData = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            if(data.modifiedCount>0){
+              toast.success('Successfull Updated')
+              navigate('/mytoys')
+            }
             form.reset();
           });
 
