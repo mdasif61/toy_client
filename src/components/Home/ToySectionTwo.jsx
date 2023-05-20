@@ -7,9 +7,9 @@ import '../Css/ToySectionTwo.css'
 
 const ToySectionTwo = () => {
     return (
-        <div className='flex justify-between my-20 bg-gray-800'>
-            <div className='w-3/4'>
-                <div className='kids text-white p-10 bg-white w-full h-full'>
+        <div className='flex md:flex-row flex-col justify-between my-20 bg-gray-800'>
+            <div className='md:w-3/4 w-full'>
+                <div className='kids text-white md:p-10 p-5 bg-white w-full h-full'>
                     <div className='bg-orange-600 my-3 bg-opacity-20 p-5 rounded-xl'>
                     <h1 className='text-2xl font-bold mb-3'>Experience the Thrill of Cricket with Our Exciting Cricket Toys!</h1>
                     <p>Ignite your cricketing spirit with our dynamic range of cricket toys! Designed for enthusiasts of all ages, our toys bring the excitement of the game right to your fingertips. Practice your strokes</p>
@@ -20,7 +20,7 @@ const ToySectionTwo = () => {
                     </div>
                 </div>
             </div>
-            <div className='grid grid-cols-2 w-1/2 gap-5 p-10'>
+            <div className='grid grid-cols-2 md:w-1/2 w-full gap-5 p-10'>
                 <div className='border-orange-600 rounded-t-2xl border-2 p-3'>
                     <img className='rounded-t-2xl' src={imgOne} alt="" />
                 </div>

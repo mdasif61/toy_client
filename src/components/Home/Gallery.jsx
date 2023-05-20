@@ -15,9 +15,9 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="mt-20 mb-40 w-8/12 mx-auto">
-      <h1 className="text-2xl font-semibold text-center">
-        Our <span className="text-orange-500 font-bold text-4xl">Toys</span>{" "}
+    <div className="md:mt-20 mt-10 md:mb-40 mb-20 md:w-8/12 w-10/12 mx-auto">
+      <h1 className="md:text-2xl text-xl font-semibold text-center">
+        Our <span className="text-orange-500 font-bold md:text-4xl text-2xl">Toys</span>{" "}
         Gallery
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gallery-con gap-5 my-12">
