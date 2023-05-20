@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/Icons/Google.png";
 import { UserOther } from "../authContextApi/AuthProvider";
 import toast from "react-hot-toast";
+import dynamicTitle from "../Shared/CustomHook";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -10,6 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  dynamicTitle('Login')
 
   const handleLogin = (event) => {
     event.preventDefault();

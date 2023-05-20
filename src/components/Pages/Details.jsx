@@ -4,9 +4,13 @@ import footbalAnim from "../../assets/Images/detailsAnim.json";
 import { useLottie } from "lottie-react";
 import Rating from "react-rating";
 import { FaStar, FaStarHalf } from "react-icons/fa";
+import dynamicTitle from "../Shared/CustomHook";
 
 const Details = () => {
   const detailsData = useLoaderData();
+
+  dynamicTitle("Details")
+
   const {
     name,
     category,

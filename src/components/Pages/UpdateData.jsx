@@ -1,16 +1,19 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import dynamicTitle from '../Shared/CustomHook';
 
 const UpdateData = () => {
     const updateToy=useLoaderData();
     const navigate=useNavigate()
 
+    dynamicTitle('Update Data')
+
     const handleUpdateToy=(event)=>{
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        const price = form.price.value;
+        const price = parseFloat(form.price.value).toFixed(2);
         const category = form.category.value;
         const rating = form.rating.value;
         const quantity = form.quantity.value;

@@ -5,10 +5,14 @@ import Rating from "react-rating";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../Css/MyToys.css";
+import dynamicTitle from "../Shared/CustomHook";
 
 const MyToys = () => {
   const [myToy, setMyToy] = useState([]);
   const { user } = useContext(UserOther);
+  const [priceSort, setPriceSort] = useState("Any");
+
+  dynamicTitle('My Toy')
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,9 +54,35 @@ const MyToys = () => {
     });
   };
 
+  useEffect(()=>{
+    fetch(`https://sports-special-server.onrender.com/mytoys/${user.email}/${priceSort}`)
+    .then(res=>res.json())
+    .then(data=>{
+      setMyToy(data)
+    })
+  },[priceSort])
+
   return (
     <div className="min-h-[calc(100vh-146px)]">
       <div className="my-20">
+        <div className="mb-5 text-right">
+          <label htmlFor="sort">
+            <span className="text-lg text-gray-500 font-semibold">
+              Sort By Price :
+            </span>
+          </label>
+          <select
+            onChange={(e) => setPriceSort(e.target.value)}
+            name="sort"
+            id=""
+            className="border py-2 px-4 ml-3 rounded-md focus:outline-none"
+          >
+            <option selected>Any</option>
+            <option value="Minimum">Minimum</option>
+            <option value="Maximum">Maximum</option>
+          </select>
+        </div>
+
         <div>
           <table className="w-full table text-center">
             <thead className="w-full">

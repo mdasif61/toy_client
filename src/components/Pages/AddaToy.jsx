@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserOther } from "../authContextApi/AuthProvider";
 import { toast } from "react-hot-toast";
+import dynamicTitle from "../Shared/CustomHook";
 
 const AddaToy = () => {
 
   const {user}=useContext(UserOther)
   const [error,setError]=useState("")
+
+  dynamicTitle('Add Toy')
 
   useEffect(()=>{
     window.scrollTo(0,0)

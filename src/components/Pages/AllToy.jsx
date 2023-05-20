@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
 import { Link, useLoaderData } from "react-router-dom";
 import Modal from "../Modals/Modal";
+import dynamicTitle from "../Shared/CustomHook";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
   const [modalData, setModalData] = useState({});
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(20);
+
+  dynamicTitle('All Toy')
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,14 +30,6 @@ const AllToy = () => {
       .then((res) => res.json())
       .then((data) => {
         setAllToys(data);
-      });
-  };
-
-  const handleModal = (id) => {
-    fetch(`https://sports-special-server.onrender.com/uniqueToy/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setModalData(data);
       });
   };
 
@@ -100,7 +95,7 @@ const AllToy = () => {
         ) : (
           <>
             <button
-              onClick={() => setLimit(4)}
+              onClick={() => setLimit(20)}
               className="btn bg-red-500 border-none"
             >
               Show Less

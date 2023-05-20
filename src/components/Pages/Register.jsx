@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import googleIcon from "../../assets/Icons/Google.png";
 import { UserOther } from '../authContextApi/AuthProvider';
 import toast from "react-hot-toast";
+import dynamicTitle from '../Shared/CustomHook';
 
 const Register = () => {
     const [error,setError]=useState("")
     const {createUser,updateData, googleLogin, logOut}=useContext(UserOther);
     const navigate=useNavigate()
+
+    dynamicTitle('Register')
 
     const handleRegister=event=>{
         event.preventDefault();

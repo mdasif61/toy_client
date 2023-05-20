@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
+import dynamicTitle from "../Shared/CustomHook";
 
 const Blog = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  dynamicTitle('Blog')
+
   return (
     <div className="min-h-[100vh-146px] my-16">
       <h1 className="uppercase text-xl font-bold mb-6 text-center">
