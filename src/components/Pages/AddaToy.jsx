@@ -18,7 +18,7 @@ const AddaToy = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const price = form.price.value;
+    const price = parseFloat(form.price.value);
     const category = form.category.value;
     const rating = form.rating.value;
     const quantity = form.quantity.value;
@@ -81,7 +81,7 @@ const AddaToy = () => {
       .then((res) => res.json())
       .then((data) => {
         toast.success("Successfully Added Toy")
-        // form.reset();
+        form.reset();
       });
   };
 
