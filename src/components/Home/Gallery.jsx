@@ -20,7 +20,7 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="md:mt-20 mt-10 md:mb-40 mb-20 md:w-8/12 w-10/12 mx-auto">
+    <div className="md:mt-20 border-2 p-10 rounded-xl border-orange-600 mt-10 md:mb-40 mb-20 md:w-8/12 w-10/12 mx-auto">
       <h1 className="md:text-2xl text-xl font-semibold text-center">
         Our <span className="text-orange-500 font-bold md:text-4xl text-2xl">Toys</span>{" "}
         Gallery
