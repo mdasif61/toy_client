@@ -24,7 +24,7 @@ const Tab = () => {
   }, [tab]);
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-16">
       <h1 className="text-center md:text-2xl text-xl mb-7 font-bold">
         Find Your Choosen Toy Category
       </h1>

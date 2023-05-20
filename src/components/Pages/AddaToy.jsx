@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserOther } from "../authContextApi/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const AddaToy = () => {
 
@@ -76,7 +77,7 @@ const AddaToy = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        toast.success("Successfully Added Toy")
         form.reset();
       });
   };

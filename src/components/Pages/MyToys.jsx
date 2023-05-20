@@ -3,15 +3,16 @@ import { UserOther } from "../authContextApi/AuthProvider";
 import { FaPen, FaStar, FaStarHalf, FaTrash } from "react-icons/fa";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import "../Css/MyToys.css";
 
 const MyToys = () => {
   const [myToy, setMyToy] = useState([]);
   const { user } = useContext(UserOther);
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     fetch(
@@ -25,21 +26,18 @@ const MyToys = () => {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
-      icon: 'warning',
+      title: "Are you sure?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'DELETE'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "DELETE",
     }).then((result) => {
-      console.log(result)
+      console.log(result);
       if (result.isConfirmed) {
-        fetch(
-          `https://sports-special-server.onrender.com/mytoys/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`https://sports-special-server.onrender.com/mytoys/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -47,14 +45,9 @@ const MyToys = () => {
               setMyToy(remaining);
             }
           });
-        Swal.fire(
-          'Deleted!',
-          'Your toy has been deleted.',
-          'success'
-        )
+        Swal.fire("Deleted!", "Your toy has been deleted.", "success");
       }
-    })
-
+    });
   };
 
   return (
@@ -62,21 +55,21 @@ const MyToys = () => {
       <div className="my-20">
         <div>
           <table className="w-full table text-center">
-            <thead>
+            <thead className="w-full">
               <tr>
-                <td>Image</td>
-                <td>Toy Info</td>
-                <td>Category</td>
-                <td>Price</td>
-                <td>Available Quantity</td>
-                <td>Ratings</td>
-                <td>Seller Info</td>
-                <td>Action</td>
+                <th>Image</th>
+                <th>Toy Name</th>
+                <th>Sub-Category</th>
+                <th>Price</th>
+                <th>Available Quantity</th>
+                <th>Ratings</th>
+                <th>Seller Info</th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="w-full mt-7">
               {myToy.map((toys) => (
-                <tr key={toys._id}>
+                <tr className="displaySize w-full" key={toys._id}>
                   <td>
                     <img className="w-20 rounded" src={toys.picture} alt="" />
                   </td>
@@ -102,12 +95,12 @@ const MyToys = () => {
                   </td>
                   <td>
                     <Link to={`/updateData/${toys._id}`}>
-                    <button
-                      title="Edit toy info"
-                      className="text-orange-600 mx-2"
-                    >
-                     <FaPen />
-                    </button>
+                      <button
+                        title="Edit toy info"
+                        className="text-orange-600 mx-2"
+                      >
+                        <FaPen />
+                      </button>
                     </Link>
                     <button
                       onClick={() => handleDelete(toys._id)}

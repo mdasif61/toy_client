@@ -1,6 +1,0 @@
-table tbody tr:nth-child(odd){
-    background-color: rgb(255, 239, 151);
-}
-th, td{
-    margin: 200px 0;
-}

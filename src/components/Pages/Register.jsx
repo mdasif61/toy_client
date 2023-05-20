@@ -42,9 +42,6 @@ const Register = () => {
             })
             toast.success('Successfully Registared')
             setError("")
-            logOut()
-            .then(result=>{})
-            .catch(error=>{setError(error.message)})
             navigate('/login')
             form.reset()
         })
@@ -56,7 +53,23 @@ const Register = () => {
     }
 
     const handleGoogleRegister=()=>{
-
+        googleLogin()
+        .then(result=>{
+          const user=result.user;
+          updateData(user,user.displayName,user.photoURL)
+            .then(result=>{
+                console.log(result)
+            })
+            .catch(error=>{
+                setError(error.message)
+          })
+          toast.success('Successfully Registred!')
+          navigate('/login')
+          // console.log(result.user)
+        })
+        .catch(error=>{
+          setError(error.message)
+        })
     }
 
     return (

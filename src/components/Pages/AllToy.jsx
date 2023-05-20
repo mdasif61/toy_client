@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
-import { Navigate, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Modal from "../Modals/Modal";
-import { UserOther } from "../authContextApi/AuthProvider";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
@@ -11,14 +10,12 @@ const AllToy = () => {
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(4);
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
-    fetch(
-      `https://sports-special-server.onrender.com/alltoys?limit=${limit}`
-    )
+    fetch(`https://sports-special-server.onrender.com/alltoys?limit=${limit}`)
       .then((res) => res.json())
       .then((data) => {
         setAllToys(data);
@@ -26,9 +23,7 @@ const AllToy = () => {
   }, [toyName === "", limit]);
 
   const handleSearch = () => {
-    fetch(
-      `https://sports-special-server.onrender.com/searchName/${toyName}`
-    )
+    fetch(`https://sports-special-server.onrender.com/searchName/${toyName}`)
       .then((res) => res.json())
       .then((data) => {
         setAllToys(data);
@@ -36,9 +31,7 @@ const AllToy = () => {
   };
 
   const handleModal = (id) => {
-    fetch(
-      `https://sports-special-server.onrender.com/uniqueToy/${id}`
-    )
+    fetch(`https://sports-special-server.onrender.com/uniqueToy/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setModalData(data);
@@ -69,7 +62,7 @@ const AllToy = () => {
           <tr>
             <td>Seller Name</td>
             <td>Toy Name</td>
-            <td>Category</td>
+            <td>Sub-Category</td>
             <td>Price</td>
             <td>Available Quantity</td>
             <td>Action</td>
@@ -84,13 +77,11 @@ const AllToy = () => {
               <td className="font-bold">${toy.price}</td>
               <td>{toy.quantity}</td>
               <td>
-                <label
-                  onClick={() => handleModal(toy._id)}
-                  htmlFor='my-modal-3'
-                  className="btn"
-                >
-                  View Details
-                </label>
+                <Link to={`/details/${toy._id}`}>
+                  <button className="bg-gray-200 hover:bg-gray-300 duration-300 py-2 px-4 rounded-md">
+                    View Details
+                  </button>
+                </Link>
               </td>
             </tr>
           ))}
@@ -117,7 +108,7 @@ const AllToy = () => {
           </>
         )}
       </div>
-      <Modal modalData={modalData}></Modal>
+      {/* <Modal modalData={modalData}></Modal> */}
     </div>
   );
 };

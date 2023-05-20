@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { signIn,googleLogin,updateData } = useContext(UserOther);
-  const navigate=useNavigate();
-  const location=useLocation();
-  const from=location.state?.from?.pathname || '/'
+  const { signIn, googleLogin, updateData } = useContext(UserOther);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -20,33 +20,34 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        updateData(user,user.displayName,user.photoURL)
-        .then(result=>{
-            console.log(result)
-        })
-        .catch(error=>{
-            setError(error.message)
-        })
         setError("");
-        toast.success('Successfully logged!')
-        navigate(from)
+        toast.success("Successfully logged!");
+        navigate(from);
       })
       .catch((error) => {
         setError(error.message);
       });
   };
 
-  const handleGoogleLogin=()=>{
-      googleLogin()
-      .then(result=>{
-        console.log(result)
-        toast.success('Successfully logged!')
-        navigate(from)
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        updateData(user,user.displayName,user.photoURL)
+            .then(result=>{
+                console.log(result)
+            })
+            .catch(error=>{
+              setError(error.message)
+        })
+        console.log(user);
+        toast.success("Successfully logged!");
+        navigate(from);
       })
-      .catch(error=>{
-        setError(error.message)
-      })
-  }
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
   return (
     <div className="min-h-[calc(100vh-146px)] flex items-center justify-center">
@@ -94,7 +95,10 @@ const Login = () => {
             </Link>
           </p>
         </form>
-        <div onClick={handleGoogleLogin} className="flex hover:bg-gray-200 items-center justify-center bg-gray-100 border-2 border-gray-400 rounded-full mt-7 cursor-pointer py-3 px-4">
+        <div
+          onClick={handleGoogleLogin}
+          className="flex hover:bg-gray-200 items-center justify-center bg-gray-100 border-2 border-gray-400 rounded-full mt-7 cursor-pointer py-3 px-4"
+        >
           <img className="w-6" src={googleIcon} alt="" />
           <span className="ml-2 text-black font-bold">Login With Google</span>
         </div>
