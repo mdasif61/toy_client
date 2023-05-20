@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
 import { Link, useLoaderData } from "react-router-dom";
-import Modal from "../Modals/Modal";
 import dynamicTitle from "../Shared/CustomHook";
 
 const AllToy = () => {
@@ -11,7 +10,7 @@ const AllToy = () => {
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(20);
 
-  dynamicTitle('All Toy')
+  dynamicTitle("All Toy");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -83,27 +82,28 @@ const AllToy = () => {
         </tbody>
       </table>
       <div className="text-center mt-7">
-        {limit == 4 ? (
+        {totalToy >= 20 && (
           <>
             <button
               onClick={() => setLimit(totalToy)}
-              className="btn bg-red-500 border-none"
+              className={`${
+                totalToy === limit && "hidden"
+              } btn bg-red-500 border-none`}
             >
               Show All
             </button>
           </>
-        ) : (
-          <>
-            <button
-              onClick={() => setLimit(20)}
-              className="btn bg-red-500 border-none"
-            >
-              Show Less
-            </button>
-          </>
+        )}
+
+        {limit == totalToy && (
+          <button
+            onClick={() => setLimit(20)}
+            className="btn bg-red-500 border-none"
+          >
+            Show Less
+          </button>
         )}
       </div>
-      {/* <Modal modalData={modalData}></Modal> */}
     </div>
   );
 };

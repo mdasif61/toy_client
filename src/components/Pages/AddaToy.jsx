@@ -81,7 +81,7 @@ const AddaToy = () => {
       .then((res) => res.json())
       .then((data) => {
         toast.success("Successfully Added Toy")
-        form.reset();
+        // form.reset();
       });
   };
 
