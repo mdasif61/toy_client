@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Css/AllToy.css";
-import { useLoaderData } from "react-router-dom";
+import { Navigate, useLoaderData } from "react-router-dom";
 import Modal from "../Modals/Modal";
+import { UserOther } from "../authContextApi/AuthProvider";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
@@ -9,6 +10,8 @@ const AllToy = () => {
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(4);
+  const { user} = useContext(UserOther);
+  const [open,setOpen]=useState(false)
 
   useEffect(() => {
     fetch(
@@ -80,8 +83,11 @@ const AllToy = () => {
               <td>{toy.quantity}</td>
               <td>
                 <label
-                  onClick={() => handleModal(toy._id)}
-                  htmlFor="my-modal-3"
+                  onClick={() =>{
+                    handleModal(toy._id),
+                    setOpen(!open)
+                  }}
+                  htmlFor={`${user && 'my-modal-3'}`}
                   className="btn"
                 >
                   View Details
@@ -112,7 +118,7 @@ const AllToy = () => {
           </>
         )}
       </div>
-      <Modal modalData={modalData}></Modal>
+      <Modal modalData={modalData}></Modal>:<Navigate to='/login'></Navigate>
     </div>
   );
 };

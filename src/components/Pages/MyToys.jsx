@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserOther } from "../authContextApi/AuthProvider";
 import { FaPen, FaStar, FaStarHalf, FaTrash } from "react-icons/fa";
 import Rating from "react-rating";
-import UpdateModal from "../Modals/UpdateModal";
 import { Link } from "react-router-dom";
 
 const MyToys = () => {

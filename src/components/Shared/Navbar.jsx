@@ -33,7 +33,7 @@ const Navbar = () => {
           Special
         </h1>
       </div>
-      <div className="text-white md:flex">
+      <div className="text-white md:flex items-center">
         <NavLink
           className={({ isActive }) =>
             isActive

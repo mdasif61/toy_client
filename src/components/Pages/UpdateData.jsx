@@ -4,37 +4,50 @@ import { useLoaderData } from 'react-router-dom';
 const UpdateData = () => {
     const updateToy=useLoaderData();
 
-    const {quantity,name,price,category,desc,rating,picture}=updateToy;
-
-    const toys={
-        quantity,
-        name,
-        price,
-        category,
-        desc,
-        rating,
-        picture
-    }
-
-    const handleUpdateToy=(id)=>{
-        fetch(`https://sports-special-server.onrender.com/toyUpdate/${id}`,{
-            method:'PUT',
-            headers:{
-                'content-type':'application/json'
+    const handleUpdateToy=(event)=>{
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const price = form.price.value;
+        const category = form.category.value;
+        const rating = form.rating.value;
+        const quantity = form.quantity.value;
+        const desc = form.desc.value;
+        const picture = form.picture.value;
+    
+        const toyInfo = {
+          name,
+          price,
+          category,
+          rating,
+          quantity,
+          desc,
+          picture,
+        };
+    
+        fetch(
+          `https://sports-special-server.onrender.com/toyUpdate/${updateToy._id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
             },
-            body:JSON.stringify(toys)
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-        })
+            body: JSON.stringify(toyInfo),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            form.reset();
+          });
+
     }
 
     const options = ["Ball Games", "Outdoor Adventures", "Team Sports"];
 
     return (
         <div className='my-20'>
-        <form className="w-full">
+        <form onSubmit={handleUpdateToy} className="w-full">
           <div className="w-full bg-orange-50 border-2 border-orange-600 p-10 rounded-xl">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
               <div className="w-full">
@@ -144,11 +157,10 @@ const UpdateData = () => {
               ></textarea>
             </div>
           </div>
-
-        </form>
-          <button onClick={()=>handleUpdateToy(updateToy._id)} className="btn btn-block my-10 bg-orange-500 border-none">
+          <button className="btn btn-block my-10 bg-orange-500 border-none">
             UPDATE TOY
           </button>
+        </form>
         </div>
     );
 };
