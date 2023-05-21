@@ -7,6 +7,7 @@ const UpdateData = () => {
     const updateToy=useLoaderData();
     const navigate=useNavigate()
 
+    // custom hook for dynamic title change
     dynamicTitle('Update Data')
 
     const handleUpdateToy=(event)=>{

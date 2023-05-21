@@ -18,6 +18,7 @@ const Login = () => {
 
   dynamicTitle('Login')
 
+  // user login handler
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -36,6 +37,7 @@ const Login = () => {
       });
   };
 
+  // user google login handler
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {

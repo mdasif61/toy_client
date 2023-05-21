@@ -8,7 +8,6 @@ import Home from "../Home/Home";
 import AddaToy from "../Pages/AddaToy";
 import AllToy from "../Pages/AllToy";
 import Details from "../Pages/Details";
-import Modal from "../Modals/Modal";
 import Error from "../Pages/Error";
 import UpdateData from "../Pages/UpdateData";
 import Blog from "../Pages/Blog";

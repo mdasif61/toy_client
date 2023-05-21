@@ -14,8 +14,10 @@ const Register = () => {
       window.scrollTo(0,0)
     },[])
 
+    // custom hook for dynamic title change
     dynamicTitle('Register')
 
+    // user create handler
     const handleRegister=event=>{
         event.preventDefault();
         const form=event.target;
@@ -42,7 +44,7 @@ const Register = () => {
             const user=result.user;
             updateData(user,name,photo)
             .then(result=>{
-                console.log(result)
+                // console.log(result)
             })
             .catch(error=>{
                 setError(error.message)
@@ -53,19 +55,20 @@ const Register = () => {
             form.reset()
         })
         .catch(error=>{
-            console.log(error)
+            // console.log(error)
             setError(error.message)
         })
 
     }
 
+    // user google create handler
     const handleGoogleRegister=()=>{
         googleLogin()
         .then(result=>{
           const user=result.user;
           updateData(user,user.displayName,user.photoURL)
             .then(result=>{
-                console.log(result)
+                // console.log(result)
             })
             .catch(error=>{
                 setError(error.message)

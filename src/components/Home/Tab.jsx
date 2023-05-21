@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import Rating from "react-rating";
-import Modal from "../Modals/Modal";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { UserOther } from "../authContextApi/AuthProvider";

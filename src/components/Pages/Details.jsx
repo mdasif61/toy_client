@@ -13,6 +13,7 @@ const Details = () => {
     window.scrollTo(0,0)
   },[])
 
+  // custom hook for dynamic title change
   dynamicTitle("Details")
 
   const {
