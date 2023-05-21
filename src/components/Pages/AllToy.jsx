@@ -11,11 +11,6 @@ const AllToy = () => {
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(20);
 
-  const navigation=useNavigation()
-  if(navigation.state==='loading'){
-    return <Loading></Loading>
-  }
-
   dynamicTitle("All Toy");
 
   useEffect(() => {
