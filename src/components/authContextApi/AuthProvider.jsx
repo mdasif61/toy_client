@@ -8,24 +8,31 @@ const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null);
     const [loading,setLoading]=useState(true)
 
+    //  first time create user
     const createUser=(email,password)=>{
         setLoading(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
+
+    // user sign in
     const signIn=(email,password)=>{
         setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
 
+    // google sign in
     const googleProvider=new GoogleAuthProvider()
     const googleLogin=()=>{
         return signInWithPopup(auth,googleProvider)
     }
+
+    // user logout
     const logOut=()=>{
         setLoading(true)
         return signOut(auth)
     }
 
+    // user profile update
     const updateData=(user,name,photo)=>{
       return updateProfile(user,{
             displayName:name,
@@ -33,6 +40,7 @@ const AuthProvider = ({children}) => {
         })
     }
 
+    // logged user observer
     useEffect(()=>{
         const unSubscribe=onAuthStateChanged(auth,currentUser=>{
             setUser(currentUser)
@@ -43,6 +51,7 @@ const AuthProvider = ({children}) => {
         }
     },[updateData])
 
+    // all context data pass obj
     const info={
         user,
         createUser,

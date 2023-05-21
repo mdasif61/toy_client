@@ -14,6 +14,7 @@ const AddaToy = () => {
     window.scrollTo(0,0)
   },[])
 
+  // form data collect and post data
   const handleAddToy = (event) => {
     event.preventDefault();
     const form = event.target;

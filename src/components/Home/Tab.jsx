@@ -34,6 +34,7 @@ const Tab = () => {
         Find Your Choosen Toy Category
       </h1>
       <div className="flex items-center md:w-full w-11/12 mx-auto justify-center">
+        {/* all category tab */}
         <div
           onClick={() => setTab("All")}
           className={`bg-black rounded-l-full flex items-center justify-center h-12 md:h-auto md:py-3 md:px-8 px-3 text-sm md:text-base text-white cursor-pointer ${
@@ -42,6 +43,8 @@ const Tab = () => {
         >
           <h1>All</h1>
         </div>
+
+        {/* ball games sub-category tab */}
         <div
           onClick={() => setTab("Ball Games")}
           className={`bg-black md:py-3 md:px-8 h-12 flex items-center justify-center md:h-auto px-3 text-sm md:text-base text-white cursor-pointer ${
@@ -50,6 +53,8 @@ const Tab = () => {
         >
           <h1>Ball Games</h1>
         </div>
+
+        {/* outdor adventures category tab */}
         <div
           onClick={() => setTab("Outdoor Adventures")}
           className={`bg-black md:py-3 md:px-8 h-12 flex items-center justify-center md:h-auto px-3 text-sm md:text-base text-white cursor-pointer ${
@@ -58,6 +63,8 @@ const Tab = () => {
         >
           <h1>Outdoor Adventures</h1>
         </div>
+
+        {/* team sports category tab */}
         <div
           onClick={() => setTab("Team Sports")}
           className={`bg-black rounded-r-full h-12 flex items-center justify-center md:h-auto md:py-3 md:px-8 px-3 text-sm md:text-base text-white cursor-pointer ${

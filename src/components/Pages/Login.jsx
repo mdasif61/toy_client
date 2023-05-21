@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/Icons/Google.png";
 import { UserOther } from "../authContextApi/AuthProvider";
@@ -11,6 +11,10 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   dynamicTitle('Login')
 

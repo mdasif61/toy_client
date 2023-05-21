@@ -11,6 +11,8 @@ const Banner = () => {
 
   return (
     <div className="md:my-10 my-5 flex md:flex-row flex-col-reverse justify-between banner md:p-10 p-5 rounded-2xl">
+      
+      {/* banner text description */}
       <div data-aos='fade-up' className="md:w-1/2 w-full flex items-center justify-center">
         <div className="space-y-8">
           <h1 className="text-orange-500 mt-7 md:mt-0 font-bold md:text-4xl text-xl md:leading-[50px]">
@@ -29,6 +31,8 @@ const Banner = () => {
           <button className="btn btn-warning">Shop Now</button>
         </div>
       </div>
+
+      {/* banner img */}
       <div data-aos='fade-up' className="md:w-1/2 w-full flex items-center justify-center">
         <img src={toys} alt="" />
       </div>

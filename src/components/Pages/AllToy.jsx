@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import dynamicTitle from "../Shared/CustomHook";
+import Loading from "./Loading";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
@@ -9,6 +10,11 @@ const AllToy = () => {
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(20);
+
+  const navigation=useNavigation()
+  if(navigation.state==='loading'){
+    return <Loading></Loading>
+  }
 
   dynamicTitle("All Toy");
 
@@ -24,6 +30,8 @@ const AllToy = () => {
       });
   }, [toyName === "", limit]);
 
+
+  // search system
   const handleSearch = () => {
     fetch(`https://sports-special-server.onrender.com/searchName/${toyName}`)
       .then((res) => res.json())

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import googleIcon from "../../assets/Icons/Google.png";
 import { UserOther } from '../authContextApi/AuthProvider';
@@ -9,6 +9,10 @@ const Register = () => {
     const [error,setError]=useState("")
     const {createUser,updateData, googleLogin, logOut}=useContext(UserOther);
     const navigate=useNavigate()
+
+    useEffect(()=>{
+      window.scrollTo(0,0)
+    },[])
 
     dynamicTitle('Register')
 

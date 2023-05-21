@@ -97,9 +97,10 @@ const UpdateData = () => {
                   name="category"
                   id=""
                   className="w-full mt-2 h-12 border py-2 px-4 focus:outline-none"
+                  defaultValue={updateToy.category}
                 >
                   {options.map((option) => (
-                    <option key={option}>{option}</option>
+                    <option className='bg-gray-500' key={option}>{option}</option>
                   ))}
                 </select>
               </div>
