@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../Css/AllToy.css";
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import dynamicTitle from "../Shared/CustomHook";
-import Loading from "./Loading";
 
 const AllToy = () => {
   const [allToys, setAllToys] = useState([]);
-  const [modalData, setModalData] = useState({});
   const [toyName, setToyName] = useState("");
   const { totalToy } = useLoaderData();
   const [limit, setLimit] = useState(20);
